@@ -27,6 +27,7 @@ void loop()
     humidity = dht.readHumidity();
     tempC = dht.readTemperature();
     delay(dt);
+    Serial.println(tempC);
     if (tempC < optTempC + 2.5 && tempC > optTempC - 2.5)
     {
         Serial.println("Temperature is Ok");
@@ -53,6 +54,8 @@ void loop()
         {
             Serial.println("Sent Signal");
             mySender.send(rawDataON, RAW_DATA_LEN, 38);
+            delay(dt);
+            mySender.send(rawDataMODE, RAW_DATA_LEN, 38);
             delay(dt);
             onFlag = 1;
             if (tempC > optTempC)
